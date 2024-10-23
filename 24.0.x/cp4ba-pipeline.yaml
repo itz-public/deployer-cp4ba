@@ -7,7 +7,7 @@ spec:
   params:
     - name: cp4ba-case
       type: string
-      default: "24.0.0"
+      default: "24.0.0-IF002"
     - name: namespace
       type: string
       default: "cp4ba-starter"
