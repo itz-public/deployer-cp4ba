@@ -186,7 +186,7 @@ spec:
 
               yaml_file=$(workspaces.ws.path)/sources/cp4ba.yaml
               yq -e '.metadata.namespace = "$(params.namespace)"' -i $yaml_file
-              yq -e '.spec.appVersion = "24.0.2"' -i $yaml_file
+              yq -e '.spec.appVersion = "24.0.0"' -i $yaml_file
               yq -e '.spec.shared_configuration.storage_configuration.sc_dynamic_storage_classname = "ocs-external-storagecluster-cephfs"' -i $yaml_file
               yq -e '.spec.shared_configuration.storage_configuration.sc_block_storage_classname = "ocs-external-storagecluster-ceph-rbd"' -i $yaml_file
               yaml_content=$(cat "$yaml_file")
