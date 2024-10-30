@@ -11,6 +11,12 @@ spec:
     - name: namespace
       type: string
       default: "cp4ba-starter"
+    - name: sc_dynamic_storage_classname
+      type: string
+      default: "ocs-storagecluster-cephfs"
+    - name: sc_block_storage_classname
+      type: string
+      default: "ocs-storagecluster-ceph-rbd"
   workspaces:
     - name: ws
   tasks:
@@ -180,7 +186,9 @@ spec:
 
               yaml_file=$(workspaces.ws.path)/sources/cp4ba.yaml
               yq -e '.metadata.namespace = "$(params.namespace)"' -i $yaml_file
-              yq -e '.spec.appVersion = "24.0.0"' -i $yaml_file
+              yq -e '.spec.appVersion = "24.0.2"' -i $yaml_file
+              yq -e '.spec.shared_configuration.storage_configuration.sc_dynamic_storage_classname = "ocs-external-storagecluster-cephfs"' -i $yaml_file
+              yq -e '.spec.shared_configuration.storage_configuration.sc_block_storage_classname = "ocs-external-storagecluster-ceph-rbd"' -i $yaml_file
               yaml_content=$(cat "$yaml_file")
               echo "$yaml_content"
               # Print the content to verify
@@ -410,7 +418,7 @@ spec:
               currentDir=$(pwd)
   
               bash $currentDir/cert-kubernetes/scripts/deleteOperator.sh -n $(params.namespace)
-              printf 'y' | bash $currentDir/cert-kubernetes/scripts/cp4a-uninstall-clean-up.sh
+              printf 'y' | bash $currentDir/cert-kubernetes/scripts/cp4a-uninstall-clean-up.sh -n $(params.namespace)
 
               echo "Deleting namepspace"
               oc delete project $(params.namespace)
