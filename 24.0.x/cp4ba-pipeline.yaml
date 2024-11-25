@@ -169,10 +169,16 @@ spec:
           value: "$(params.cp4ba-case)"
         - name: namespace
           value: "$(params.namespace)"
+        - name: sc_dynamic_storage_classname
+          value: "$(params.sc_dynamic_storage_classname)"
+        - name: sc_block_storage_classname
+          value: "$(params.sc_block_storage_classname)"
       taskSpec:
         params:
           - name: cp4ba-case
           - name: namespace
+          - name: sc_dynamic_storage_classname
+          - name: sc_block_storage_classname
         steps:
           - name: script
             image: quay.io/ibmtz/ibm-pak-ubi:latest
@@ -187,8 +193,8 @@ spec:
               yaml_file=$(workspaces.ws.path)/sources/cp4ba.yaml
               yq -e '.metadata.namespace = "$(params.namespace)"' -i $yaml_file
               yq -e '.spec.appVersion = "24.0.0"' -i $yaml_file
-              yq -e '.spec.shared_configuration.storage_configuration.sc_dynamic_storage_classname = "ocs-external-storagecluster-cephfs"' -i $yaml_file
-              yq -e '.spec.shared_configuration.storage_configuration.sc_block_storage_classname = "ocs-external-storagecluster-ceph-rbd"' -i $yaml_file
+              yq -e '.spec.shared_configuration.storage_configuration.sc_dynamic_storage_classname = "$(params.sc_dynamic_storage_classname)"' -i $yaml_file
+              yq -e '.spec.shared_configuration.storage_configuration.sc_block_storage_classname = "$(params.sc_block_storage_classname)"' -i $yaml_file
               yaml_content=$(cat "$yaml_file")
               echo "$yaml_content"
               # Print the content to verify
