@@ -30,7 +30,7 @@ spec:
           image: quay.io/ibmtz/ibm-pak-ubi:latest
           script: |
             #!/usr/bin/env bash
-            git clone https://github.com/cloud-native-toolkit/deployer-cp4a-starter-sources.git $(workspaces.ws.path)/sources
+            git clone https://github.com/itz-public/deployer-cp4ba-starter-sources.git $(workspaces.ws.path)/sources
         workspaces:
           - name: ws
     - name: add-namespace
