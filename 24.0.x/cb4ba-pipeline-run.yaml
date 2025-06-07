@@ -18,9 +18,9 @@ spec:
     - name: namespace
       value: "cp4ba-starter"
     - name: sc_dynamic_storage_classname
-      value: "ocs-storagecluster-cephfs"
+      value: "ocs-external-storagecluster-cephfs"
     - name: sc_block_storage_classname
-      value: "ocs-storagecluster-ceph-rbd"
+      value: "ocs-external-storagecluster-ceph-rbd"
   workspaces:
     - name: ws
       volumeClaimTemplate:

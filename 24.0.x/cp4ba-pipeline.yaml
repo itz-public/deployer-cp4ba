@@ -16,10 +16,10 @@ spec:
       default: "cp4ba-starter"
     - name: sc_dynamic_storage_classname
       type: string
-      default: "ocs-storagecluster-cephfs"
+      default: "ocs-external-storagecluster-cephfs"
     - name: sc_block_storage_classname
       type: string
-      default: "ocs-storagecluster-ceph-rbd"
+      default: "ocs-external-storagecluster-ceph-rbd"
   workspaces:
     - name: ws
   tasks:
