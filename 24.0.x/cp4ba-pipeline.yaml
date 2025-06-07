@@ -8,6 +8,9 @@ spec:
     - name: cp4ba-case
       type: string
       default: "24.0.1-IF002"
+    - name: cp4ba-app-version
+      type: string
+      default: "24.0.1"
     - name: namespace
       type: string
       default: "cp4ba-starter"
@@ -187,12 +190,9 @@ spec:
               # Read the content of the YAML file and save it to a variable
               case=$(params.cp4ba-case)
 
-              curl -s https://raw.githubusercontent.com/IBM/cloud-pak/master/repo/case/ibm-cp-automation/index.yaml > cp-index.yaml
-              version=$(yq e ".versions.\"$case\".appVersion" cp-index.yaml)
-
               yaml_file=$(workspaces.ws.path)/sources/cp4ba.yaml
               yq -e '.metadata.namespace = "$(params.namespace)"' -i $yaml_file
-              yq -e '.spec.appVersion = "24.0.0"' -i $yaml_file
+              yq -e '.spec.appVersion = "$(params.cp4ba-app-version)"' -i $yaml_file
               yq -e '.spec.shared_configuration.storage_configuration.sc_dynamic_storage_classname = "$(params.sc_dynamic_storage_classname)"' -i $yaml_file
               yq -e '.spec.shared_configuration.storage_configuration.sc_block_storage_classname = "$(params.sc_block_storage_classname)"' -i $yaml_file
               yaml_content=$(cat "$yaml_file")

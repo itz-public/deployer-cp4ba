@@ -13,6 +13,8 @@ spec:
   params:
     - name: cp4ba-case
       value: "24.0.1-IF002"
+    - name: cp4ba-app-version
+      value: "24.0.1"
     - name: namespace
       value: "cp4ba-starter"
     - name: sc_dynamic_storage_classname
